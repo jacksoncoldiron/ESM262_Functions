@@ -3,7 +3,9 @@
 # Feb 24, 2025
 
 # Define LER function
+# Four inputs are required: yield of intercrop A, yield of monocrop A, yield of intercrop B, yield of intercrop B
 calculate_LER <- function(y_intercrop_A, y_mono_A, y_intercrop_B, y_mono_B) {
+  
   # Error handling: Ensure inputs are numeric and positive
   if (!all(sapply(list(y_intercrop_A, y_mono_A, y_intercrop_B, y_mono_B), is.numeric))) {
     stop("All inputs must be numeric values.")
