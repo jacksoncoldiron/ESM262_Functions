@@ -1,0 +1,69 @@
+---
+title: "LER Analysis"
+editor: visual
+format: 
+  html: 
+    embed-resources: true
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(here)
+# Bring in the function
+source(here("ler_intercrop_function.R"))
+```
+
+## Introduction
+The Land Equivalent Ratio (LER) is a key metric in intercropping to compare the efficiency of land use relative to monocropping. This analysis demonstrates the function using sample data.
+
+## Sample Data
+```{r generate-data}
+# For reproducibility
+set.seed(123) 
+
+# Random yield for crop A (intercrop)
+yield_intercrop_A <- runif(1, 2, 5)  
+
+# Random yield for crop A (monocrop)
+yield_mono_A <- runif(1, 4, 7)
+
+# Random yield for crop B (intercrop)
+yield_intercrop_B <- runif(1, 1, 3) 
+
+# Random yield for crop B (monocrop)
+yield_mono_B <- runif(1, 3, 6)       #
+
+data.frame(yield_intercrop_A, yield_mono_A, yield_intercrop_B, yield_mono_B)
+```
+
+## Calculating LER
+```{r calculate-ler}
+LER_value <- calculate_LER(yield_intercrop_A, yield_mono_A, yield_intercrop_B, yield_mono_B)
+LER_value
+```
+
+## Visualization
+```{r plot-ler}
+library(ggplot2)
+
+data <- data.frame(
+  Crop = c("Crop A", "Crop B"),
+  Intercrop = c(yield_intercrop_A, yield_intercrop_B),
+  Monocrop = c(yield_mono_A, yield_mono_B)
+)
+
+data_long <- reshape2::melt(data, id.vars = "Crop")
+
+ggplot(data_long, aes(x = Crop, y = value, fill = variable)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  scale_fill_manual(values = c("Intercrop" = "#1b9e77", "Monocrop" = "#d95f02")) +
+  labs(title = "Intercropping vs. Monocropping Yields", y = "Yield", x = "Crop", fill = "System") +
+  theme_classic()
+```
+
+## Conclusion
+The LER calculation provides insight into the efficiency of intercropping versus monocropping. If LER > 1, intercropping is beneficial; otherwise, monocropping may be preferable.
