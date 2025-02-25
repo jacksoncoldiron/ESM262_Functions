@@ -2,6 +2,15 @@
 # LER Function
 # Feb 24, 2025
 
+#' Land Equivalent Ratio (LER) Function
+#' 
+#' This function the LER for two crops intercropped together
+#'
+#' @param y_intercrop_A yield of crop A in intercrop
+#' @param y_mono_A yield of crop A in monoculture
+#' @param y_intercrop_B yield of crop B in intercrop
+#' @param y_mono_B yield of crop B in monoculture
+
 # Define LER function
 # Four inputs are required: yield of intercrop A, yield of monocrop A, yield of intercrop B, yield of intercrop B
 calculate_LER <- function(y_intercrop_A, y_mono_A, y_intercrop_B, y_mono_B) {
