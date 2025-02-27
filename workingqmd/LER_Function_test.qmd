@@ -6,7 +6,6 @@ format:
     embed-resources: true
 ---
 
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
@@ -18,9 +17,11 @@ source(here("ler_intercrop_function.R"))
 ```
 
 ## Introduction
+
 The Land Equivalent Ratio (LER) is a key metric in intercropping to compare the efficiency of land use relative to monocropping. This analysis demonstrates the function using sample data.
 
 ## Sample Data
+
 ```{r generate-data}
 # For reproducibility
 set.seed(123) 
@@ -41,12 +42,14 @@ data.frame(yield_intercrop_A, yield_mono_A, yield_intercrop_B, yield_mono_B)
 ```
 
 ## Calculating LER
+
 ```{r calculate-ler}
 LER_value <- calculate_LER(yield_intercrop_A, yield_mono_A, yield_intercrop_B, yield_mono_B)
 LER_value
 ```
 
 ## Visualization
+
 ```{r plot-ler}
 library(ggplot2)
 
@@ -65,5 +68,8 @@ ggplot(data_long, aes(x = Crop, y = value, fill = variable)) +
   theme_classic()
 ```
 
+#Reviewed this quarter file
+
 ## Conclusion
-The LER calculation provides insight into the efficiency of intercropping versus monocropping. If LER > 1, intercropping is beneficial; otherwise, monocropping may be preferable.
+
+The LER calculation provides insight into the efficiency of intercropping versus monocropping. If LER \> 1, intercropping is beneficial; otherwise, monocropping may be preferable.
